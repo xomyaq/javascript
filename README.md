@@ -1,9 +1,8 @@
-# Стиль написания кода на JavaScript для Uprock: Перевод и расширение [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript)
+# Руководство по стилю Джаваскрипта для Зачётки
 
-*Наиболее разумный подход к JavaScript*
+*Перевод и расширение [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript)*
 
-
-## <a name='TOC'>Оглавление</a>
+## <a name='TOC'>Содержание</a>
 
   1. [Типы](#types)
   1. [Объекты](#objects)
@@ -36,7 +35,7 @@
 
 ## <a name='types'>Типы</a>
 
-  - **Простые типы**: Когда вы взаимодействуете с простым типом, вы взаимодействуете непосредственно с его значением в памяти.
+  - **Примитивы**: Когда вы взаимодействуете с примитивом, вы взаимодействуете непосредственно с его значением в памяти.
 
     + `string`
     + `number`
@@ -45,8 +44,8 @@
     + `undefined`
 
     ```javascript
-    var foo = 1,
-        bar = foo;
+    var foo = 1
+      , bar = foo;
 
     bar = 9;
 
@@ -59,15 +58,15 @@
     + `function`
 
     ```javascript
-    var foo = [1, 2],
-        bar = foo;
+    var foo = [1, 2]
+      , bar = foo;
 
     bar[0] = 9;
 
     console.log(foo[0], bar[0]); // => 9, 9.
     ```
 
-    **[[⬆]](#Оглавление)**
+  **[[⬆] Содержание](#TOC)**
 
 ## <a name='objects'>Объекты</a>
 
@@ -115,7 +114,8 @@
       type: 'alien'
     };
     ```
-    **[[⬆]](#Оглавление)**
+
+  **[[⬆] Содержание](#TOC)**
 
 ## <a name='arrays'>Массивы</a>
 
@@ -145,9 +145,9 @@
   - Если вам необходимо скопировать массив, используйте Array::slice. [jsPerf](http://jsperf.com/converting-arguments-to-an-array/7)
 
     ```javascript
-    var len = items.length,
-        itemsCopy = [],
-        i;
+    var len = items.length
+      , itemsCopy = []
+      , i;
 
     // плохо
     for (i = 0; i < len; i++) {
@@ -163,11 +163,12 @@
     ```javascript
     function trigger() {
       var args = Array.prototype.slice.call(arguments);
-      ...
+
+      // Тут манипуляции с массивом
     }
     ```
 
-    **[[⬆]](#Оглавление)**
+  **[[⬆] Содержание](#TOC)**
 
 
 ## <a name='strings'>Строки</a>
@@ -209,20 +210,20 @@
   - Когда строка создается программным путем, используйте Array::join вместо объединения строк. В основном для IE: [jsPerf](http://jsperf.com/string-vs-array-concat/2).
 
     ```javascript
-    var items,
-        messages,
-        length,
-        i;
+    var items
+      , messages
+      , length
+      , i;
 
     messages = [{
-        state: 'success',
-        message: 'Это работает.'
-    },{
-        state: 'success',
-        message: 'Это тоже.'
-    },{
-        state: 'error',
-        message: 'А я томат.'
+      state: 'success',
+      message: 'Это работает.'
+    }, {
+      state: 'success',
+      message: 'Это тоже.'
+    }, {
+      state: 'error',
+      message: 'А я томат.'
     }];
 
     length = messages.length;
@@ -250,7 +251,7 @@
     }
     ```
 
-    **[[⬆]](#Оглавление)**
+  **[[⬆] Содержание](#TOC)**
 
 
 ## <a name='functions'>Функции</a>
@@ -259,7 +260,7 @@
 
     ```javascript
     // объявление анонимной функции
-    var anonymous = function() {
+    var anonymous = function () {
       return true;
     };
 
@@ -268,7 +269,7 @@
       return true;
     };
 
-    // объявление функции, которая сразу же выполняется (замыкание)
+    // объявление функции, которая сразу же выполняется (IIF)
     (function() {
       console.log('Если вы читаете это, вы открыли консоль.');
     })();
@@ -286,6 +287,7 @@
 
     // хорошо
     var test;
+
     if (currentUser) {
       test = function test() {
         console.log('Молодец.');
@@ -307,7 +309,7 @@
     }
     ```
 
-    **[[⬆]](#Оглавление)**
+  **[[⬆] Содержание](#TOC)**
 
 
 
@@ -343,12 +345,12 @@
     var isJedi = getProp('jedi');
     ```
 
-    **[[⬆]](#Оглавление)**
+  **[[⬆] Содержание](#TOC)**
 
 
 ## <a name='variables'>Переменные</a>
 
-  - Всегда используйте `var` для объявления переменных. В противном случае переменная будет объявлена глобальной. Загрязнение глобального пространства имен — всегда плохо.
+  - Всегда используйте `var` для объявления переменных. В противном случае переменная будет объявлена глобальной. Загрязнение глобального пространства имен всегда плохо.
 
     ```javascript
     // плохо
@@ -367,31 +369,31 @@
     var dragonball = 'z';
 
     // хорошо
-    var items = getItems(),
-        goSportsTeam = true,
-        dragonball = 'z';
+    var items = getItems()
+      , goSportsTeam = true
+      , dragonball = 'z';
     ```
 
   - Объявляйте переменные, которым не присваивается значение, в конце. Это удобно, когда вам необходимо задать значение одной из этих переменных на базе уже присвоенных значений.
 
     ```javascript
     // плохо
-    var i, len, dragonball,
-        items = getItems(),
-        goSportsTeam = true;
+    var i, len, dragonball
+      , items = getItems()
+      , goSportsTeam = true;
 
     // плохо
-    var i, items = getItems(),
-        dragonball,
-        goSportsTeam = true,
-        len;
+    var i, items = getItems()
+      , dragonball
+      , goSportsTeam = true
+      , len;
 
     // хорошо
-    var items = getItems(),
-        goSportsTeam = true,
-        dragonball,
-        length,
-        i;
+    var items = getItems()
+      , goSportsTeam = true
+      , dragonball
+      , length
+      , i;
     ```
 
   - Присваивайте переменные в начале области видимости. Это помогает избегать проблем с объявлением переменных и областями видимости.
@@ -442,17 +444,19 @@
 
     // хорошо
     function() {
+      var name;
+
       if (!arguments.length) {
         return false;
       }
 
-      var name = getName();
+      name = getName();
 
       return true;
     }
     ```
 
-    **[[⬆]](#Оглавление)**
+  **[[⬆] Содержание](#TOC)**
 
 
 ## <a name='hoisting'>Области видимости</a>
@@ -544,7 +548,7 @@
 
   - Более подробно можно прочитать в статье [JavaScript Scoping & Hoisting](http://www.adequatelygood.com/2010/2/JavaScript-Scoping-and-Hoisting) от [Ben Cherry](http://www.adequatelygood.com/)
 
-    **[[⬆]](#Оглавление)**
+  **[[⬆] Содержание](#TOC)**
 
 
 
@@ -593,7 +597,7 @@
 
   - Более подробно можно прочитать в статье [Truth Equality and JavaScript](http://javascriptweblog.wordpress.com/2011/02/07/truth-equality-and-javascript/#more-2108) от Angus Croll
 
-    **[[⬆]](#Оглавление)**
+  **[[⬆] Содержание](#TOC)**
 
 
 ## <a name='blocks'>Блоки кода</a>
@@ -608,21 +612,21 @@
     // хорошо
     if (test) return false;
 
-    // хорошо
+    // ещё лучше
     if (test) {
       return false;
     }
 
     // плохо
-    function() { return false; }
+    function nope() { return false; }
 
     // хорошо
-    function() {
+    function nope() {
       return false;
     }
     ```
 
-    **[[⬆]](#Оглавление)**
+  **[[⬆] Содержание](#TOC)**
 
 
 ## <a name='comments'>Комментарии</a>
@@ -634,8 +638,8 @@
     // make() возвращает новый элемент
     // основываясь на получаемом имени тэга
     //
-    // @param <String> tag
-    // @return <Element> element
+    // @param {String} tag
+    // @return {Element} element
     function make(tag) {
 
       // ...создаем element...
@@ -648,8 +652,8 @@
      * make() возвращает новый элемент
      * основываясь на получаемом имени тэга
      *
-     * @param <String> tag
-     * @return <Element> element
+     * @param {String} tag
+     * @return {Element} element
      */
     function make(tag) {
 
@@ -714,8 +718,8 @@
       return this;
     }
   ```
-
-    **[[⬆]](#Оглавление)**
+  
+  **[[⬆] Содержание](#TOC)**
 
 
 ## <a name='whitespace'>Пробелы</a>
@@ -745,11 +749,19 @@
     function test(){
       console.log('test');
     }
+    
+    var anotherTest = function(){
+      console.log('test');
+    };
 
     // хорошо
     function test() {
       console.log('test');
     }
+    
+    var anotherTest = function () {
+      console.log('test');
+    };
 
     // плохо
     dog.set('attr',{
@@ -811,32 +823,40 @@
         .call(tron.led);
     ```
 
-    **[[⬆]](#Оглавление)**
+  **[[⬆] Содержание](#TOC)**
 
 ## <a name='commas'>Запятые</a>
 
-  - Запятые в начале строки: **Нет.**
+  - Запятые в начале строки: **Да.** — для списка переменных.
 
-    ```javascript
-    // плохо
-    var once
-      , upon
-      , aTime;
-
-    // хорошо
+```javascript
+    // bad
     var once,
         upon,
         aTime;
 
-    // плохо
-    var hero = {
-        firstName: 'Bob'
-      , lastName: 'Parr'
-      , heroName: 'Mr. Incredible'
-      , superPower: 'strength'
-    };
+    // good
+    var once
+      , upon
+      , aTime
+```
+  - Запятые в начале строки: **Нет.** — для списка массивов и объектов.
 
-    // хорошо
+```javascript
+    // bad
+    var magicWords = [ "abracadabra"
+                     , "gesundheit"
+                     , "ventrilo"
+                     ]
+      , spells = { "fireball" : function () { setOnFire() }
+                 , "water" : function () { putOut() }
+                 }
+      , a = 1
+      , b = "abc"
+      , etc
+      , somethingElse;
+
+    // good
     var hero = {
       firstName: 'Bob',
       lastName: 'Parr',
@@ -873,7 +893,7 @@
     ];
     ```
 
-    **[[⬆]](#Оглавление)**
+  **[[⬆] Содержание](#TOC)**
 
 
 ## <a name='semicolons'>Точки с запятой</a>
@@ -900,7 +920,7 @@
     })();
     ```
 
-    **[[⬆]](#Оглавление)**
+  **[[⬆] Содержание](#TOC)**
 
 
 ## <a name='type-coercion'>Приведение типов</a>
@@ -983,7 +1003,7 @@
     var hasAge = !!age;
     ```
 
-    **[[⬆]](#Оглавление)**
+  **[[⬆] Содержание](#TOC)**
 
 
 ## <a name='naming-conventions'>Соглашение об именовании</a>
@@ -1086,7 +1106,7 @@
 
     ```javascript
     // плохо
-    var log = function(msg) {
+    var log = function (msg) {
       console.log(msg);
     };
 
@@ -1096,7 +1116,7 @@
     };
     ```
 
-    **[[⬆]](#Оглавление)**
+  **[[⬆] Содержание](#TOC)**
 
 
 ## <a name='accessors'>Геттеры и сеттеры: функции для доступа к значениям объекта</a>
@@ -1150,7 +1170,7 @@
     };
     ```
 
-    **[[⬆]](#Оглавление)**
+  **[[⬆] Содержание](#TOC)**
 
 
 ## <a name='constructors'>Конструкторы</a>
@@ -1235,7 +1255,7 @@
     };
     ```
 
-    **[[⬆]](#Оглавление)**
+  **[[⬆] Содержание](#TOC)**
 
 
 ## <a name='events'>События</a>
@@ -1248,7 +1268,7 @@
 
     ...
 
-    $(this).on('listingUpdated', function(e, listing) {
+    $(this).on('listingUpdated', function (e, listing) {
          //делаем что-нибудь с listing, например:
          listing.name = listings[listing.id]
     });
@@ -1262,12 +1282,12 @@
 
     ...
 
-    $(this).on('listingUpdated', function(e, data) {
+    $(this).on('listingUpdated', function (e, data) {
       // делаем что-нибудь с data.listingId
     });
     ```
 
-  **[[⬆]](#Оглавление)**
+  **[[⬆] Содержание](#TOC)**
 
 
 ## <a name='modules'>Модули</a>
@@ -1298,7 +1318,7 @@
     }(this);
     ```
 
-    **[[⬆]](#Оглавление)**
+  **[[⬆] Содержание](#TOC)**
 
 
 ## <a name='jquery'>jQuery</a>
@@ -1360,7 +1380,7 @@
     $sidebar.find('ul');
     ```
 
-    **[[⬆]](#Оглавление)**
+  **[[⬆] Содержание](#TOC)**
 
 
 ## <a name='es5'>Совместимость ECMAScript 5</a>
@@ -1380,7 +1400,7 @@
     }
     ```
 
-    **[[⬆]](#Оглавление)**
+  **[[⬆] Содержание](#TOC)**
 
 
 ## <a name='performance'>Быстродействие</a>
@@ -1394,7 +1414,7 @@
   - [Long String Concatenation](http://jsperf.com/ya-string-concat)
   - В процессе наполнения...
 
-  **[[⬆]](#Оглавление)**
+  **[[⬆] Содержание](#TOC)**
 
 
 ## <a name='resources'>Ресурсы</a>
@@ -1450,7 +1470,7 @@
   - [Dustin Diaz](http://dustindiaz.com/)
   - [nettuts](http://net.tutsplus.com/?s=javascript)
 
-  **[[⬆]](#Оглавление)**
+  **[[⬆] Содержание](#TOC)**
 
 ## <a name='in-the-wild'>В реальном мире</a>
 
@@ -1513,5 +1533,4 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-**[[⬆]](#Оглавление)**
-
+**[[⬆] Содержание](#TOC)**
